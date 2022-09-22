@@ -6,7 +6,7 @@ from rest_framework.response import Response
 
  
 # import the TodoSerializer from the serializer file
-from .serializers import ProfileSerializer, PhotoSerializer, PhotoRetrieveSerializer
+from .serializers import ProfileSerializer, PhotoSerializer, PhotoRetrieveSerializer, ProfileRetriveSerializer
 from .models import Profile, Photo
  
 # import the Todo model from the models file
@@ -20,7 +20,7 @@ class ProfileView(viewsets.ViewSet):
             photos = Photo.objects.filter(profile=pk)
             queryset.photos = photos
             queryset.num_photos = len(photos)
-            serializer = ProfileSerializer(queryset)
+            serializer = ProfileRetriveSerializer(queryset)
             return Response(serializer.data)
 
 
@@ -42,6 +42,6 @@ class PhotoView(viewsets.ModelViewSet):
         comments = Comment.objects.filter(photo=photo)
         photo.comments = comments
         num_likes = len(Like.objects.filter(photo=photo))
-        photo.num_likes = num_likes
+        photo.number_likes = num_likes
         serializer = PhotoRetrieveSerializer(photo)
         return Response(serializer.data)
