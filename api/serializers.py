@@ -34,6 +34,7 @@ class ProfileSerializer(serializers.ModelSerializer):
 class PhotoSerializer(TaggitSerializer, serializers.ModelSerializer):
     
     tags = TagListSerializerField()
+    profile = ProfileSerializer(read_only=True)
     class Meta:
         model = Photo
         fields = ('id', 'image', 'profile', 'tags')
