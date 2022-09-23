@@ -55,6 +55,7 @@ class PhotoRetrieveSerializer(serializers.ModelSerializer):
     number_likes = serializers.IntegerField()
     profile = ProfileSerializer(read_only=True)
     image = serializers.CharField()
+    tags = TagListSerializerField()
     class Meta:
         model = Photo
-        fields = ('id', 'image', 'profile', 'comments', 'number_likes')
+        fields = ('id', 'image', 'profile', 'comments', 'number_likes', 'tags')
