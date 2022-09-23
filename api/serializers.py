@@ -11,6 +11,7 @@ class ImageSerializer(serializers.Serializer):
 
 
 class ProfileRetriveSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
     username = serializers.CharField(max_length=200)
     bio = serializers.CharField(max_length=200)
     logo = serializers.CharField()
