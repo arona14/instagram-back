@@ -31,9 +31,12 @@ class PhotoView(viewsets.ModelViewSet):
 
     def list(self, request):
         profile_id = request.query_params.get('profile')
+        tag = request.query_params.get('tag')
         queryset = Photo.objects.all()
         if profile_id:
             queryset = queryset.filter(profile=profile_id)
+        if tag:
+            queryset = queryset.filter(tags__name__in=[tag])
         serializer = PhotoSerializer(queryset, many=True)
         return Response(serializer.data)
 
