@@ -7,13 +7,13 @@ from .models import Photo, Comment, Profile
 
 
 class ImageSerializer(serializers.Serializer):
-    image = serializers.ImageField()
+    image = serializers.CharField()
 
 
 class ProfileRetriveSerializer(serializers.Serializer):
     username = serializers.CharField(max_length=200)
     bio = serializers.CharField(max_length=200)
-    logo = serializers.ImageField()
+    logo = serializers.CharField()
     photos = ImageSerializer(many=True)
     num_photos = serializers.IntegerField()
 
@@ -35,6 +35,7 @@ class PhotoSerializer(TaggitSerializer, serializers.ModelSerializer):
     
     tags = TagListSerializerField()
     profile = ProfileSerializer(read_only=True)
+    image = serializers.CharField()
     class Meta:
         model = Photo
         fields = ('id', 'image', 'profile', 'tags')
@@ -53,6 +54,7 @@ class PhotoRetrieveSerializer(serializers.ModelSerializer):
     comments = CommentSerializer(read_only=True, many=True)
     number_likes = serializers.IntegerField()
     profile = ProfileSerializer(read_only=True)
+    image = serializers.CharField()
     class Meta:
         model = Photo
         fields = ('id', 'image', 'profile', 'comments', 'number_likes')
